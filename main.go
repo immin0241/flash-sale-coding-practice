@@ -37,6 +37,11 @@ type Order struct {
 	Product   Product
 }
 
+type BuyForm struct {
+	ProductID int `json:"product_id"`
+	Amount    int `json:"amount"`
+}
+
 func extractUserId(c fiber.Ctx) (string, error) {
 	authHeader := c.Get(fiber.HeaderAuthorization)
 
@@ -141,8 +146,53 @@ func main() {
 		return c.JSON(product)
 	})
 
-	transactions.Get("/buy/:id", basicauth.New(authConfig), func(c fiber.Ctx) error {
-		return c.SendString("WIP")
+	transactions.Post("/buy", basicauth.New(authConfig), func(c fiber.Ctx) error {
+		payload := new(BuyForm)
+
+		if err := c.Bind().Body(payload); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": "Invalid JSON.",
+			})
+		}
+
+		product, err := gorm.G[Product](db).Where("Id = ?", payload.ProductID).First(c.Context())
+
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": "Invalid product or product is unavilable.",
+			})
+		}
+
+		if product.Stock < 0 {
+			return c.Status(fiber.StatusGone).JSON(fiber.Map{
+				"error": "Product is out of stock.",
+			})
+		}
+
+		userId, err := extractUserId(c)
+
+		if err != nil {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Unauthorized user.",
+			})
+		}
+
+		db.Model(&product).Update("stock", gorm.Expr("stock - ?", payload.Amount))
+
+		transactionResult := Order{
+			OrderDate: time.Now(),
+			Orderer:   userId,
+			ProductID: product.ID,
+			Amount:    payload.Amount,
+		}
+
+		queryResult := db.Create(&transactionResult)
+
+		if queryResult.Error != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Internal Server Error"})
+		}
+
+		return c.JSON(transactionResult)
 	})
 
 	transactions.Get("/log", basicauth.New(authConfig), func(c fiber.Ctx) error {
