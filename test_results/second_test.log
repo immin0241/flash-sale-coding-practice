@@ -59,3 +59,17 @@ flash_sale   [   0% ] 1000 VUs  0m09.9s/2m0s  0005/1000 iters, 1 per VU
 
 running (0m10.2s), 0000/1000 VUs, 1000 complete and 0 interrupted iterations
 flash_sale ✓ [ 100% ] 1000 VUs  0m10.2s/2m0s  1000/1000 iters, 1 per VU
+
+---
+
+Postgres DB
+
+SELECT COUNT(*) FROM orders
+|count|
+|-----|
+|100  |
+
+SELECT stock FROM products WHERE id = 1
+|stock|
+|-----|
+|0    |

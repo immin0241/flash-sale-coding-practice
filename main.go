@@ -42,6 +42,16 @@ type BuyForm struct {
 	Amount    int `json:"amount"`
 }
 
+type TransactionErr struct {
+	Code    int
+	Message string
+	Err     error
+}
+
+func (e *TransactionErr) Error() string {
+	return e.Message
+}
+
 func extractUserId(c fiber.Ctx) (string, error) {
 	authHeader := c.Get(fiber.HeaderAuthorization)
 
@@ -178,10 +188,15 @@ func main() {
 				Update("stock", gorm.Expr("stock - ?", payload.Amount))
 
 			if result.Error != nil {
-				return result.Error
+				return &TransactionErr{Code: fiber.StatusInternalServerError, Message: "서버 오류가 발생했습니다.", Err: result.Error}
 			}
 			if result.RowsAffected == 0 {
-				return errors.New("재고가 부족하거나 존재하지 않는 상품입니다")
+				return &TransactionErr{Code: fiber.StatusGone, Message: "올바르지 않은 상품이거나 재고가 없습니다.", Err: result.Error}
+			}
+
+			var updatedProduct Product
+			if err := tx.First(&updatedProduct, payload.ProductID).Error; err != nil {
+				return err
 			}
 
 			newTx := Order{
@@ -189,10 +204,11 @@ func main() {
 				Orderer:   userId,
 				ProductID: uint(payload.ProductID),
 				Amount:    payload.Amount,
+				Product:   updatedProduct,
 			}
 
 			if err := tx.Create(&newTx).Error; err != nil {
-				return err
+				return &TransactionErr{Code: fiber.StatusInternalServerError, Message: "서버 오류가 발생했습니다.", Err: result.Error}
 			}
 
 			transactionResult = newTx
@@ -200,7 +216,17 @@ func main() {
 		})
 
 		if err != nil {
-			return c.SendStatus(400)
+			var transErr *TransactionErr
+
+			if errors.As(err, &transErr) {
+				return c.Status(transErr.Code).JSON(fiber.Map{
+					"error": transErr.Message,
+				})
+			}
+
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Internal Server Error",
+			})
 		}
 
 		return c.JSON(transactionResult)
