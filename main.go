@@ -105,6 +105,13 @@ func main() {
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
+	sqlDB, err := db.DB()
+
+	sqlDB.SetMaxIdleConns(100)
+	sqlDB.SetMaxOpenConns(200)
+	sqlDB.SetConnMaxLifetime(30 * time.Minute)
+	sqlDB.SetConnMaxIdleTime(5 * time.Minute)
+
 	migrate(db)
 
 	if err != nil {
@@ -155,41 +162,45 @@ func main() {
 			})
 		}
 
-		product, err := gorm.G[Product](db).Where("Id = ?", payload.ProductID).First(c.Context())
-
-		if err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-				"error": "Invalid product or product is unavilable.",
-			})
-		}
-
-		if product.Stock < 0 {
-			return c.Status(fiber.StatusGone).JSON(fiber.Map{
-				"error": "Product is out of stock.",
-			})
-		}
-
 		userId, err := extractUserId(c)
 
 		if err != nil {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-				"error": "Unauthorized user.",
+				"error": "Cannot authenticate.",
 			})
 		}
 
-		db.Model(&product).Update("stock", gorm.Expr("stock - ?", payload.Amount))
+		var transactionResult Order
 
-		transactionResult := Order{
-			OrderDate: time.Now(),
-			Orderer:   userId,
-			ProductID: product.ID,
-			Amount:    payload.Amount,
-		}
+		err = db.Transaction(func(tx *gorm.DB) error {
+			result := tx.Model(&Product{}).
+				Where("id = ? AND stock - ? >= 0", payload.ProductID, payload.Amount).
+				Update("stock", gorm.Expr("stock - ?", payload.Amount))
 
-		queryResult := db.Create(&transactionResult)
+			if result.Error != nil {
+				return result.Error
+			}
+			if result.RowsAffected == 0 {
+				return errors.New("재고가 부족하거나 존재하지 않는 상품입니다")
+			}
 
-		if queryResult.Error != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Internal Server Error"})
+			newTx := Order{
+				OrderDate: time.Now(),
+				Orderer:   userId,
+				ProductID: uint(payload.ProductID),
+				Amount:    payload.Amount,
+			}
+
+			if err := tx.Create(&newTx).Error; err != nil {
+				return err
+			}
+
+			transactionResult = newTx
+			return nil
+		})
+
+		if err != nil {
+			return c.SendStatus(400)
 		}
 
 		return c.JSON(transactionResult)
