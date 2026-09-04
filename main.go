@@ -132,17 +132,107 @@ func main() {
 
 	authConfig := basicauth.Config{
 		Users: map[string]string{
-			"admin":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user1":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user2":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user3":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user4":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user5":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user6":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user7":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user8":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user9":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
-			"user10": "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"admin":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user1":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user2":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user3":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user4":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user5":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user6":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user7":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user8":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user9":   "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user10":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user11":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user12":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user13":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user14":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user15":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user16":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user17":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user18":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user19":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user20":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user21":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user22":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user23":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user24":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user25":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user26":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user27":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user28":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user29":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user30":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user31":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user32":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user33":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user34":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user35":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user36":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user37":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user38":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user39":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user40":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user41":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user42":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user43":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user44":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user45":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user46":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user47":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user48":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user49":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user50":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user51":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user52":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user53":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user54":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user55":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user56":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user57":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user58":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user59":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user60":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user61":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user62":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user63":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user64":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user65":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user66":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user67":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user68":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user69":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user70":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user71":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user72":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user73":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user74":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user75":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user76":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user77":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user78":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user79":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user80":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user81":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user82":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user83":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user84":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user85":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user86":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user87":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user88":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user89":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user90":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user91":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user92":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user93":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user94":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user95":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user96":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user97":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user98":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user99":  "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
+			"user100": "$2a$12$5ZRgwbTLZJDaE7itOdFLiORvgtVaCEgbqH5f8WXLlJckZWrc2UwRi",
 		},
 	}
 
@@ -157,8 +247,22 @@ func main() {
 		return c.JSON(product)
 	})
 
-	products.Get("/:id", func(c fiber.Ctx) error {
-		product, _ := gorm.G[Product](db).Where("Id = ?", c.Params("id")).First(c.Context())
+	products.Get("/:id", basicauth.New(authConfig), func(c fiber.Ctx) error {
+		userId, err := extractUserId(c)
+
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Internal Server Error",
+			})
+		}
+
+		if userId != "admin" {
+			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+				"error": "Unauthenticated access.",
+			})
+		}
+
+		product, _ := gorm.G[Product](db).Where("id = ?", c.Params("id")).Find(c.Context())
 
 		return c.JSON(product)
 	})
@@ -181,6 +285,7 @@ func main() {
 		}
 
 		var transactionResult Order
+		var existingOrder Order
 
 		err = db.Transaction(func(tx *gorm.DB) error {
 			result := tx.Model(&Product{}).
@@ -192,6 +297,14 @@ func main() {
 			}
 			if result.RowsAffected == 0 {
 				return &TransactionErr{Code: fiber.StatusGone, Message: "올바르지 않은 상품이거나 재고가 없습니다.", Err: result.Error}
+			}
+
+			if err := tx.Where("orderer = ? AND product_id = ?", userId, payload.ProductID).Limit(1).Find(&existingOrder).Error; err != nil {
+				return &TransactionErr{Code: fiber.StatusInternalServerError, Message: "DB 조회 중 오류가 발생했습니다.", Err: err}
+			}
+
+			if existingOrder.ID != 0 {
+				return &TransactionErr{Code: fiber.StatusBadRequest, Message: "1인 1개만 구매할 수 있습니다.", Err: nil}
 			}
 
 			var updatedProduct Product
@@ -233,9 +346,17 @@ func main() {
 	})
 
 	transactions.Get("/log", basicauth.New(authConfig), func(c fiber.Ctx) error {
-		userId, _ := extractUserId(c)
+		userId, err := extractUserId(c)
 
-		return c.SendString(userId)
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Internal Server Error",
+			})
+		}
+
+		orders, _ := gorm.G[Order](db).Where("orderer = ?", userId).Find(c.Context())
+
+		return c.JSON(orders)
 	})
 
 	log.Fatal(app.Listen(":8000"))

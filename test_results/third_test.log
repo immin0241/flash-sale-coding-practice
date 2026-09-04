@@ -1,0 +1,99 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: flash_sale.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 2m30s max duration (incl. graceful stop):
+              * flash_sale: 10 iterations for each of 100 VUs (maxDuration: 2m0s, gracefulStop: 30s)
+
+
+running (0m01.0s), 100/100 VUs, 0 complete and 0 interrupted iterations
+flash_sale   [   0% ] 100 VUs  0m01.0s/2m0s  0000/1000 iters, 10 per VU
+
+running (0m02.0s), 100/100 VUs, 13 complete and 0 interrupted iterations
+flash_sale   [   1% ] 100 VUs  0m02.0s/2m0s  0013/1000 iters, 10 per VU
+
+running (0m03.0s), 100/100 VUs, 63 complete and 0 interrupted iterations
+flash_sale   [   6% ] 100 VUs  0m03.0s/2m0s  0063/1000 iters, 10 per VU
+
+running (0m04.0s), 100/100 VUs, 119 complete and 0 interrupted iterations
+flash_sale   [  12% ] 100 VUs  0m04.0s/2m0s  0119/1000 iters, 10 per VU
+
+running (0m05.0s), 100/100 VUs, 174 complete and 0 interrupted iterations
+flash_sale   [  17% ] 100 VUs  0m05.0s/2m0s  0174/1000 iters, 10 per VU
+
+running (0m06.0s), 100/100 VUs, 226 complete and 0 interrupted iterations
+flash_sale   [  23% ] 100 VUs  0m06.0s/2m0s  0226/1000 iters, 10 per VU
+
+running (0m07.0s), 100/100 VUs, 286 complete and 0 interrupted iterations
+flash_sale   [  29% ] 100 VUs  0m07.0s/2m0s  0286/1000 iters, 10 per VU
+
+running (0m08.0s), 100/100 VUs, 343 complete and 0 interrupted iterations
+flash_sale   [  34% ] 100 VUs  0m08.0s/2m0s  0343/1000 iters, 10 per VU
+
+running (0m09.0s), 100/100 VUs, 399 complete and 0 interrupted iterations
+flash_sale   [  40% ] 100 VUs  0m09.0s/2m0s  0399/1000 iters, 10 per VU
+
+running (0m10.0s), 099/100 VUs, 462 complete and 0 interrupted iterations
+flash_sale   [  46% ] 100 VUs  0m10.0s/2m0s  0462/1000 iters, 10 per VU
+
+running (0m11.0s), 096/100 VUs, 534 complete and 0 interrupted iterations
+flash_sale   [  53% ] 100 VUs  0m11.0s/2m0s  0534/1000 iters, 10 per VU
+
+running (0m12.0s), 091/100 VUs, 603 complete and 0 interrupted iterations
+flash_sale   [  60% ] 100 VUs  0m12.0s/2m0s  0603/1000 iters, 10 per VU
+
+running (0m13.0s), 087/100 VUs, 668 complete and 0 interrupted iterations
+flash_sale   [  67% ] 100 VUs  0m13.0s/2m0s  0668/1000 iters, 10 per VU
+
+running (0m14.0s), 073/100 VUs, 742 complete and 0 interrupted iterations
+flash_sale   [  74% ] 100 VUs  0m14.0s/2m0s  0742/1000 iters, 10 per VU
+
+running (0m15.0s), 063/100 VUs, 816 complete and 0 interrupted iterations
+flash_sale   [  82% ] 100 VUs  0m15.0s/2m0s  0816/1000 iters, 10 per VU
+
+running (0m16.0s), 048/100 VUs, 882 complete and 0 interrupted iterations
+flash_sale   [  88% ] 100 VUs  0m16.0s/2m0s  0882/1000 iters, 10 per VU
+
+running (0m17.0s), 023/100 VUs, 959 complete and 0 interrupted iterations
+flash_sale   [  96% ] 100 VUs  0m17.0s/2m0s  0959/1000 iters, 10 per VU
+{
+  "scenario": "flash sale: 10 requests per user",
+  "virtual_users": 100,
+  "iterations_per_user": 10,
+  "total_requests": 1000,
+  "expected_sales": 100,
+  "successful_sales": 99,
+  "sold_out_responses": 518,
+  "duplicate_responses": 381,
+  "unexpected_responses": 2,
+  "request_timeouts": 1,
+  "http_req_duration_ms": {
+    "p95": 4523.53233355,
+    "p99": null
+  }
+}
+
+running (0m17.8s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+flash_sale ✓ [ 100% ] 100 VUs  0m17.8s/2m0s  1000/1000 iters, 10 per VU
+
+---
+
+Postgres DB
+
+SELECT distinct COUNT(orderer) FROM orders WHERE product_id = 1
+|count|
+|-----|
+|100  |
+
+SELECT stock FROM products WHERE id = 1
+|stock|
+|-----|
+|0    |
