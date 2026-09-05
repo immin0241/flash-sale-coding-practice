@@ -31,9 +31,9 @@ type Product struct {
 type Order struct {
 	gorm.Model
 	OrderDate time.Time
-	Orderer   string
-	Amount    int
-	ProductID uint
+	Orderer   string `gorm:"uniqueIndex:no_duplicate_purchase"`
+	Amount    int 
+	ProductID uint `gorm:"uniqueIndex:no_duplicate_purchase"`
 	Product   Product
 }
 
